@@ -1,0 +1,38 @@
+Window - Preferences
+General - Workspace 에서 Text file encoding : UTF-8 설정
+Web - CSS Files 에서 Encoding : UTF-8 설정
+      HTML Files 에서 Encoding : UTF-8 설정
+      JSP Files 에서 Encoding : UTF-8 설정
+XML - XML Files 에서 Encoding : UTF-8 설정
+
+General - Colors and Fonts - Basic - Text Font -  Edit - D2 coding
+	- Web Browser - External Web browsers 'Chrome' 선택
+	- Editors - Text Editors 선택 - Displayed tab width 2로 설정,
+				      - Insert spaces for tabs 체크
+Java - Code Style - Formatter 에서 New - 이름설정 후 Indentation - Tab poliy를 Spaces only로 설정
+								 - Indentation size 2, Tab size 2로 설정
+Web - Client-side JavaScript - Formatter 에서 New - 이름설정 후 Indentation - Tab poliy를 Spaces only로 설정
+								            - Indentation size 2, Tab size 2로 설정
+    - CSS Files - Editor 에서 Indent using spaces 체크, Indentation size 2로 설정
+    - HTML Files - Editor 에서 Indent using spaces 체크, Indentation size 2로 설정
+XML - XML FIles - Editor 에서 Indent using spaces 체크, Indentation size 2로 설정
+
+JSP 실행을 위해 tomcat(https://tomcat.apache.org/) 설치가 필요하다.
+Tomcat9 - Core zip파일 설치
+
+환경변수 설정하기
+내PC - 설정 - 고급시스템설정 - 환경변수 에서 시스템변수 - 새로만들기 에서 변수이름 : CATALINA_HOME
+					                - Path - 편집 에서 새로만들기 - '%CATALINA_HOME%\bin' 이름으로 생성
+
+Server - Runtime Environments - add 에서 Apache - Apache Tomcat v9.0클릭후 next - Browse로 아파치톰캣 파일 설정후 Finish
+화면 하단에 new servers - Apache Tomcat v9.0클릭후 next
+
+Context root 수정하기
+Properties - Web Project Settings 에서 수정 가능
+
+Properties - Java Compiler 에서 Complier compliance level 11로 변경(자바 버전 체크 후 맞게)
+	   - Project Facet 에서 Java 버전 11로 변경(자바 버전 체크 후 맞게)
+Web 주소 구조
+protocol://host:port/contextRoot/urlMapping
+http://localhost/servlet/HelloServlet
+			      

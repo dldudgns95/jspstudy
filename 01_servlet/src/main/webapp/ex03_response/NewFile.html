@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+  <div>
+    <!-- method 방식을 post로 바꿔도 doPost()에서 변경되는 것은 없다.(post를 get방식으로 변환해서 사용하기 때문) -->
+    <form method="post" action="/servlet/response">
+      <div>
+        <!-- radio는 2개 이상의 값을 받을 수 없기 때문에 String[](배열)이 아닌 String으로 받는다. -->
+        <input type="radio" name="gender" value="male" id="male">
+        <label for="male">남자</label>
+        <input type="radio" name="gender" value="female" id="female">
+        <label for="female">여자</label>
+        <input type="radio" name="gender" value="none" id="none" checked>
+        <label for="none">선택안함</label>
+      </div>
+      <div>
+        <input type="text" list="domain" name="domain">
+        <datalist id="domain">
+          <option value="naver.com" />
+          <option value="kakao.com" />
+          <option value="gmail.com" />
+        </datalist>
+      </div>
+      <div>
+        <textarea rows="5" cols="50" name="content"></textarea>
+      </div>
+      <div>
+      <input type="hidden" name="region" value="seoul">
+      <button type="submit">전송</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

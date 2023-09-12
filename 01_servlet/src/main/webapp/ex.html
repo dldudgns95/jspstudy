@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <form id="frm">
+    <div>
+      <p>
+        <Strong>아이디</Strong><br>
+        <input type="text" id="id" name="id">@naver.com
+      </p>    
+    </div>
+    <div>
+      <p>
+        <Strong>비밀번호</Strong><br>
+        <input type="password" id="pw" name="pw">
+      </p>    
+    </div>
+    <div>
+      <p>
+        <Strong>비밀번호재확인</Strong><br>
+        <input type="password" id="pw_check" name="pw_check">
+      </p>
+    </div>
+    <div>
+      <p>
+        <Strong>이름</Strong><br>
+        <input type="text" id="name" name="name">
+      </p>
+    </div>
+    <div>
+      <p>
+        <Strong>생년월일</Strong><br>
+        <input type="text" id="birthday_year" size="4" maxlength="4" placeholder="년(4자)" name="birthday">
+        <select id="birthday_month" name="birthday">
+          <option value="none" selected>월</option>
+          <option value="1">1월</option>
+          <option value="2">2월</option>
+          <option value="3">3월</option>
+          <option value="4">4월</option>
+          <option value="5">5월</option>
+          <option value="6">6월</option>
+          <option value="7">7월</option>
+          <option value="8">8월</option>
+          <option value="9">9월</option>
+          <option value="10">10월</option>
+          <option value="11">11월</option>
+          <option value="12">12월</option>
+        </select>
+        <input type="text" id="birthday_year" size="2" maxlength="2" placeholder="일" name="birthday">
+      </p>
+    </div>
+    <div>
+      <p>
+        <Strong>성별</Strong><br>
+        <select id="gender" name="gender">
+          <option value="none" selected>성별</option>
+          <option value="male">남자</option>
+          <option value="female">여자</option>        
+        </select>
+      </p>
+    </div>
+    <div>
+      <p>
+        <Strong>본인 확인 이메일</Strong>(선택)<br>
+        <input type="text" id="checkEmail" placeholder="선택입력" name="checkEmail">
+      </p>
+    </div>
+    <div>
+      <p>
+        <Strong>휴대전화</Strong><br>
+        <select class="tel" name="tel">
+          <option value="+82" selected>대한민국 +82</option>
+        </select><br>
+        <input type="text" class="tel" size="10" placeholder="전화번호 입력" name="tel">
+        <input type="button" id="telCheck" value="인증번호 받기" name="telCheck"><br>
+        <input type="text" id="telCheckNum" placeholder="인증번호 입력하세요" name="telCheckNum">
+      </p>
+    </div>
+    <div>
+      <button type="button" id="btn">가입하기</button>
+    </div>
+  </form>
+  
+  <div id="list"></div>
+  
+  <script>
+    $('#btn').click(function(){
+      $.ajax({
+        type: "post",
+        url: "/servlet/testServlet",
+        data: $('#frm').serialize(),
+        
+        dataType: "json",
+        
+        success: function(resData){
+          console.log(resData);
+          var ul = '<ul>';
+          ul += '<li>아이디: ' + resData.id + '</li>';
+          ul += '<li>비밀번호: ' + resData.pw + '</li>';
+          ul += '<li>생년월일: ';
+          for(var i = 0; i < resData.birthday.length; i++){
+            if(i === 0) ul += resData.birthday[i] + '년 ';
+            if(i === 1) ul += resData.birthday[i] + '월 ';
+            if(i === 2) ul += resData.birthday[i] + '일';
+          }
+          ul +='</li>';
+          ul += '<li>이름: ' + resData.name + '</li>';
+          ul += '<li>성별: ' + resData.gender + '</li>';
+          ul += '<li>이메일: ' + resData.checkEmail + '</li>';
+          ul += '<li>휴대전화: ' + resData.tel + '</li>';
+          ul += '<li>휴대전화: ';
+          for(var i = 0; i < resData.tel.length; i++){
+            if(i === 0) ul += resData.tel[i] + ' ';
+            else ul += resData.tel[i];
+          }
+          ul +='</li>';
+          ul += '</ul>';
+          
+          $('#list').html(ul);
+        }
+      })
+    })
+    $('#frm').submit(function(event){
+      if($(this).find('#id').val().length === 0){
+        alert('아이디는 필수입니다.');
+        event.preventDefault();
+        return;
+      }
+      if(($(this).find('#pw').val() !== $(this).find('#pw').val()) || $(this).find('#pw').val()){
+        alert('비밀번호를 확인하세요.');
+        event.preventDefault();
+        return;
+      }
+    })
+  </script>
+
+</body>
+</html>

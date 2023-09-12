@@ -1,6 +1,8 @@
 package ex06_ajax;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,12 +40,22 @@ public class JSONServlet extends HttpServlet {
 	  
 	  // 3. JSON 만들기
 	  // {"name": "공지사항", "writer": "관리자"}
+	  // 라이브러리를 사용하지 않고 만드는 경우도 존재함(실무에서)
+	  // String str = "{\"name\":\"" + writer + "\", \"title\":\"" + title + "\"};
 	  JSONObject responseJSON = new JSONObject();
 	  responseJSON.put("title", title);
 	  responseJSON.put("writer", writer);
 	  
-	  System.out.println(responseJSON.toString());
+	  // 4. 응답 데이터 타입과 인코딩
+	  response.setContentType("aplication/json; charset=UTF-8");
 	  
+	  // 5. 응답 스트림 생성
+	  PrintWriter out = response.getWriter();
+	  
+	  // 6. 응답
+	  out.println(responseJSON);
+	  out.flush();
+	  out.close();
 		
 	}
 

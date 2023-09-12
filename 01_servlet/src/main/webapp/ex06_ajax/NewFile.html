@@ -74,7 +74,11 @@
         data: $('#frm').serialize(),  // <form> 태그의 모든 입력 요소들을 파라미터로 보낸다. 이 때 입력 요소들은 name 속성을 가지고 있어야 한다.
         /* 응답 */
         dataType: 'json',
-        success: function(resData){
+        success: function(resData){   // resData는 {"writer": "관리자", "title": "공지사항"} 형태이다.
+          var str = '';
+          str += '<h4>' + resData.title + '</h4>';
+          str += '<h4>' + resData.writer + '</h4>';
+          $('#content2').html(str);
           
         },
         error: function(jqXHR){

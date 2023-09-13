@@ -28,7 +28,7 @@ public class TestServlet2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		
+		System.out.println(request.getParameter("result"));
 		
 	}
 

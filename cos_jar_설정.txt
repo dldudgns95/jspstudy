@@ -1,0 +1,2 @@
+http://servlets.com/ - COS File Upload Library - cos-22.05.zip 다운로드 후 
+lib파일 안에 있는 cos.jar 파일을 프로젝트 WEB-INF - lib 파일에 추가(드래그)

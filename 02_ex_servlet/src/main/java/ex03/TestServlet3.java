@@ -1,8 +1,9 @@
-package test;
+package ex03;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
 /**
- * Servlet implementation class TestServlet
+ * Servlet implementation class TestServlet3
  */
-@WebServlet("/testServlet")
-public class TestServlet extends HttpServlet {
+@WebServlet("/testServlet3")
+public class TestServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestServlet() {
+    public TestServlet3() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,31 +33,27 @@ public class TestServlet extends HttpServlet {
 	  
 		request.setCharacterEncoding("UTF-8");
 		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String name = request.getParameter("name");
-		String[] birthday = request.getParameterValues("birthday");
-		String gender = request.getParameter("gender");
-		String checkEmail = request.getParameter("checkEmail");
-		String[] tel = request.getParameterValues("tel");
-		
-		JSONObject responseJSON = new JSONObject();
-		responseJSON.put("id", id);
-		responseJSON.put("pw", pw);
-		responseJSON.put("name", name);
-		responseJSON.put("birthday", birthday);
-		responseJSON.put("gender", gender);
-		responseJSON.put("checkEmail", checkEmail);
-		responseJSON.put("tel", tel);
-		
-		System.out.println(responseJSON);
-		
-		response.setContentType("aplication/json; charset=UTF-8");
-		
+		String check = request.getParameter("check");
+		Date now = new Date();
+		System.out.println(now);
+		String str;
+		if(check == "day") {
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		  System.out.println(sdf.format(now));
+		  str = "<script>alert('요청 결과는 " + sdf.format(now) + "입니다.');location.href='/ex_servlet/ex03/ex03.html';</script>"; 
+		} else {
+		  SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		  System.out.println(sdf.format(now));
+      str = "<script>alert('요청 결과는 " + sdf.format(now) + "입니다.');location.href='/ex_servlet/ex03/ex03.html';</script>"; 
+		}
+		/*
+		response.setContentType("text/html; cherset=UTF-8;");
 		PrintWriter out = response.getWriter();
-		out.println(responseJSON);
+		out.println(str);
 		out.flush();
 		out.close();
+		*/
+		
 		
 	}
 

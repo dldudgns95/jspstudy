@@ -1,6 +1,8 @@
-package test;
+package ex02;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +30,23 @@ public class TestServlet2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println(request.getParameter("result"));
+		int result = Integer.parseInt(request.getParameter("result"));
+		int value = Integer.parseInt(request.getParameter("value"));
+		String str;
+		
+		if(result == value) {
+		  str = "<script>alert('정답입니다.');location.href='/ex_servlet/ex02/ex02.html';</script>";
+		} else {
+		  str = "<script>alert('오답입니다.');location.href='/ex_servlet/ex02/ex02.html';</script>";
+		}
+		
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		out.println(str);
+		out.flush();
+		out.close();
 		
 	}
 

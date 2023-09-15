@@ -7,22 +7,24 @@
 </head>
 <body>
 
-  <form method="get" action="/servlet/testServlet2">
+  <form method="get" action="/ex_servlet/testServlet2">
     <div>
       <button type="reset">새로고침</button>  
     </div>
     <div id="text_div">
-      <input type="text" size="4" name="result">
+      <input type="hidden" id="result" name="result">
+      <input type="text" size="4" name="value">
       <button type="submit">계산</button>
     </div>
   </form>
   <script>
     var first = (Math.floor(Math.random() * 9)) + 1;
     var second = (Math.floor(Math.random() * 9)) + 1;
-    console.log(first, second);
+    var result = String(first * second);
+    console.log(result, typeof(result));
     var str =first + ' X ' + second + ' = ';
     $('#text_div').prepend(str);
-    
+    $('#result').val(result);
   </script>
 
 </body>

@@ -1,0 +1,3 @@
+https://tomcat.apache.org/ 에서 Download - Taglibs
+taglibs-standard-impl-1.2.5.jar, taglibs-standard-spec-1.2.5.jar 다운로드
+해당 프로젝트의 WEB-INF - lib에 추가

@@ -1,27 +1,24 @@
-package ex03;
+package ex06_session;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class TestServlet3
+ * Servlet implementation class Login
  */
-@WebServlet("/testServlet3")
-public class TestServlet3 extends HttpServlet {
+@WebServlet("/login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestServlet3() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +28,23 @@ public class TestServlet3 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  
+	  // 요청 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
-		String check = request.getParameter("check");
-		Date now = new Date();
-		System.out.println(now);
-		System.out.println(check);
-		String str;
-		if(check.equals("day")) {
-		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		  str = "<script>alert('요청 결과는 " + sdf.format(now) + "입니다.');location.href='/ex_servlet/ex03/ex03.html';</script>"; 
-		} else {
-		  SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-      str = "<script>alert('요청 결과는 " + sdf.format(now) + "입니다.');location.href='/ex_servlet/ex03/ex03.html';</script>"; 
+		// 요청 파라미터
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		
+		// 로그인 성공 규칙 : id와 pw가 동일하면 로그인 성공으로 가정하고 풀이
+		if(id.equals(pw)) {
+		  // 로그인 처리 : session에 id를 저장해 두기
+		  HttpSession session = request.getSession();
+		  session.setAttribute("id", id);
+		  session.setMaxInactiveInterval(60 * 10);  // 10분간 세션 유지
 		}
 		
-		response.setContentType("text/html; charset=UTF-8;");
-		PrintWriter out = response.getWriter();
-		out.println(str);
-		out.flush();
-		out.close();
-		
-		
+		// 로그인 화면으로 되돌아가기
+		response.sendRedirect(request.getContextPath() + "/ex06_session/main.jsp");
 		
 	}
 

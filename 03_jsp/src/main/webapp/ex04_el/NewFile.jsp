@@ -55,6 +55,8 @@
   <div>${sessionScope.msg}</div>
   <div>${applicationScope.msg}</div>
   
+  <hr>
+  
   <%-- 객체 사용하기 --%>
   <%
     // 객체를 만든 뒤 EL 사용이 가능한 binding 영역에 넣는다.

@@ -15,6 +15,6 @@ public class BoardDto {
   private int board_no;
   private String title;
   private String content;
-  private Date modefied_at;
+  private Date modified_at;
   private Date created_at;
 }

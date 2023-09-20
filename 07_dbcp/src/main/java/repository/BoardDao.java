@@ -25,6 +25,7 @@ public class BoardDao {
   
   // Singleton Pattern으로 BoardDao 객체 생성 (DB를 사용하기 위해서는 singleton이 필요하다.)
   private static BoardDao dao = new BoardDao();
+  
   private BoardDao() {
     // META-INF/context.xml에 있는 <Resource name="jdbc/oraclexe" /> 태그 내용을 읽어서 DataSource 객체 생성하기
     try {
@@ -35,6 +36,7 @@ public class BoardDao {
       e.printStackTrace();  
     }
   }
+  
   public static BoardDao getDao() {
     return dao;
   }
@@ -216,7 +218,28 @@ public class BoardDao {
     return modifyResult;
   }
   
-  
+  // 게시글 삭제 메소드
+  public int delete(int board_no) {
+    
+    // 삭제 결과
+    int deleteResult = 0;
+    
+    try {
+      con = dataSource.getConnection();
+      String sql = "DELETE FROM BOARD_T WHERE BOARD_NO = ?";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, board_no);
+      deleteResult = ps.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      close();
+    }
+    
+    // 삭제 결과 반환
+    return deleteResult;
+    
+  }
   
   
   

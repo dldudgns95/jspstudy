@@ -24,11 +24,13 @@ public class BoardServiceImpl implements BoardService {
     // 등록할 제목과 내용
     String title = request.getParameter("title");
     String content = request.getParameter("content");
+    String editor = request.getParameter("editor");
     
     // 제목 + 내용 -> BoardDto 객체
     BoardDto dto = BoardDto.builder()
                       .title(title)
                       .content(content)
+                      .editor(editor)
                       .build();
     // BoardDao의 register 메소드 호출
     int registerResult = dao.register(dto);
@@ -36,7 +38,7 @@ public class BoardServiceImpl implements BoardService {
     // 등록 성공(registerResult == 1), 등록 실패(registerResult == 0)
     String path = null;
     if(registerResult == 1) {
-      path = request.getContextPath() + "/board/list.do";
+      path = request.getContextPath() + "/list.do";
     } else if(registerResult == 0) {
       path = request.getContextPath() + "/index.do";
     }
@@ -71,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
     
     // 게시글 목록과 paging을 /board/list.jsp로 전달하기 위하여 request에 저장한 뒤 forward 한다.
     request.setAttribute("boardList", boardList);
-    request.setAttribute("paging", pageVo.getPaging(request.getContextPath() + "/board/list.do"));
+    request.setAttribute("paging", pageVo.getPaging(request.getContextPath() + "/list.do"));
     
     return new ActionForward("/board/list.jsp", false);
   }
@@ -80,14 +82,14 @@ public class BoardServiceImpl implements BoardService {
   public ActionForward getBoardByNo(HttpServletRequest request) {
     
     // 상세조회할 게시글 번호
-    Optional<String> opt = Optional.ofNullable(request.getParameter("board_no"));
-    int board_no = Integer.parseInt(opt.orElse("0"));
+    Optional<String> opt = Optional.ofNullable(request.getParameter("article_no"));
+    int article_no = Integer.parseInt(opt.orElse("0"));
     
     // DB로부터 게시글 가져오기
-    BoardDto board = dao.getBoardByNo(board_no);
+    BoardDto article = dao.getBoardByNo(article_no);
     
     // 게시글을 /board/detail.jsp에 전달하기 위해서 forward 처리
-    request.setAttribute("board", board);
+    request.setAttribute("article", article);
     return new ActionForward("/board/detail.jsp", false);
   }
   
@@ -95,14 +97,16 @@ public class BoardServiceImpl implements BoardService {
   public ActionForward edit(HttpServletRequest request) {
     
     // 편집할 게시글 번호
-    Optional<String> opt = Optional.ofNullable(request.getParameter("board_no"));
-    int board_no = Integer.parseInt(opt.orElse("0"));
+    Optional<String> opt = Optional.ofNullable(request.getParameter("article_no"));
+    int article_no = Integer.parseInt(opt.orElse("0"));
+    
+    System.out.println(article_no);
     
     // DB로부터 게시글 가져오기
-    BoardDto board = dao.getBoardByNo(board_no);
+    BoardDto article = dao.getBoardByNo(article_no);
     
     // 게시글을 /board/edit.jsp에 전달하기 위해서 forward 처리
-    request.setAttribute("board", board);
+    request.setAttribute("article", article);
     return new ActionForward("/board/edit.jsp", false);
   }
   
@@ -112,13 +116,13 @@ public class BoardServiceImpl implements BoardService {
     // 수정할 게시글 정보
     String title = request.getParameter("title");
     String content = request.getParameter("content");
-    int board_no = Integer.parseInt(request.getParameter("board_no"));
+    int article_no = Integer.parseInt(request.getParameter("article_no"));
     
     // 수정할 게시글 정보를 BoardDto 객체로 생성
     BoardDto dto = BoardDto.builder()
                     .title(title)
                     .content(content)
-                    .board_no(board_no)
+                    .article_no(article_no)
                     .build();
     
     //수정하기
@@ -127,7 +131,7 @@ public class BoardServiceImpl implements BoardService {
     // 수정 성공(modifyResult == 1), 수정 실패(modifyResult == 0)
     String path = null;
     if(modifyResult == 1) {
-      path = request.getContextPath() + "/board/detail.do?board_no=" + board_no;
+      path = request.getContextPath() + "/detail.do?article_no=" + article_no;
     } else if (modifyResult == 0){
       path = request.getContextPath() + "/index.do";
     }
@@ -140,19 +144,40 @@ public class BoardServiceImpl implements BoardService {
   public ActionForward delete(HttpServletRequest request) {
     
     // 삭제 게시글 번호
-    Optional<String> opt = Optional.ofNullable(request.getParameter("board_no"));
-    int board_no = Integer.parseInt(opt.orElse("0"));
+    Optional<String> opt = Optional.ofNullable(request.getParameter("article_no"));
+    int article_no = Integer.parseInt(opt.orElse("0"));
     // 삭제하기
-    int deleteResult = dao.delete(board_no);
+    int deleteResult = dao.delete(article_no);
     // 삭제 성공(deleteResult == 1), 삭제 실패(deleteResult == 0)
     String path = null;
     if(deleteResult == 1) {
-      path = request.getContextPath() + "/board/list.do";
+      path = request.getContextPath() + "/list.do";
     } else if(deleteResult == 0) {
       path = request.getContextPath() + "/index.do";
     }
     // delete 이후에는 redirect 한다.
     return new ActionForward(path, true);
+  }
+  
+  @Override
+  public ActionForward deleteCheck(HttpServletRequest request) {
+    /*
+    // 삭제 게시글 번호
+    Optional<String> opt = Optional.ofNullable(request.getParameter("article_no"));
+    int article_no = Integer.parseInt(opt.orElse("0"));
+    // 삭제하기
+    int deleteResult = dao.delete(article_no);
+    // 삭제 성공(deleteResult == 1), 삭제 실패(deleteResult == 0)
+    String path = null;
+    if(deleteResult == 1) {
+      path = request.getContextPath() + "/list.do";
+    } else if(deleteResult == 0) {
+      path = request.getContextPath() + "/index.do";
+    }
+    // delete 이후에는 redirect 한다.
+    return new ActionForward(path, true);
+    */
+    return null;
   }
   
 }

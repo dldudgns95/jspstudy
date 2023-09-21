@@ -1,0 +1,4 @@
+https://junit.org/junit4/ -> Download and install -> junit.jar 및 hamcrest-core.jar -> 클릭 후 version -> Browse
+
+junit-4.13.2.jar
+hamcrest-core-1.3.jar 각각 다운로드

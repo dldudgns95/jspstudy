@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
 <!DOCTYPE html>
 <html>
@@ -12,8 +12,7 @@
 <body>
 
   <div>
-    <a href="${contextPath}/list.do">게시판목록</a>
-    <a href="${contextPath}/write.do">게시글작성</a>
+    <a href="${contextPath}/getArticleList.do">기사목록</a>
   </div>
 
 </body>

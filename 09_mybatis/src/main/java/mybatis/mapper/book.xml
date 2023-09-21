@@ -56,14 +56,10 @@
      WHERE BOOK_NO = #{bookNo} 
   </delete>
   <!--
-  <delete id="bookDelete" parameterType="array">
+  <delete id="bookDelete" parameterType="String">
     DELETE 
       FROM BOOK_T 
-     WHERE BOOK_NO IN (
-      <foreach collection="bookNo" item="checkBookNo" separator=",">
-        #{checkBookNo}
-      </foreach>
-     )
+     WHERE BOOK_NO IN (#{bookNo})
   </delete>
   -->
   

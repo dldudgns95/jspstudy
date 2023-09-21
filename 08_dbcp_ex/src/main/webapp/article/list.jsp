@@ -18,7 +18,7 @@
   $(function(){
     fnCheckbox();
   })
-
+  
   function fnCheckbox(){
     $('#chk_all').click(function(){
       $('.chk_each').prop('checked', $(this).prop('checked'));
@@ -31,6 +31,21 @@
       $('#chk_all').prop('checked', total === $('.chk_each').length);
     })
   }
+  
+  function fnArticleDelete(){
+    
+    if(!confirm('선택한 기사들을 삭제할까요?')) {
+      return;
+    }
+    let array = [];
+    // $.each(배열, function(인덱스, 요소){})
+    $.each($('.chk_each'), function(i, elem) {
+      if($(elem).is(':checked')) {
+        array.push($(elem).val());
+      }
+    })
+    location.href='${contextPath}/deleteArticle.do?articles=' + array.join(',');
+  }
 
 </script>
 </head>
@@ -38,6 +53,7 @@
 
   <div>
     <a href="${contextPath}/writeArticle.do">기사작성하러가기</a>
+    <a href="javascript:fnArticleDelete()">선택한기사삭제하기</a>
   </div>
 
   <hr>
@@ -54,6 +70,7 @@
     <div>작성된 기사가 없습니다.</div>
   </c:if>
   <c:if test="${not empty articleList}">
+    <%-- forEach 안에 있으면 class로 사용해야한다(id 사용X) --%>
     <c:forEach items="${articleList}" var="article">
       <div class="article">
         <input type="checkbox" class="chk_each" value="${article.article_no}">

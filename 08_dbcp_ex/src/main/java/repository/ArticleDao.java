@@ -227,4 +227,25 @@ public class ArticleDao {
     
   }
   
+  // 선택 삭제 메소드
+  public int articleDelete(String articles) {
+    
+    int deleteResult = 0;
+    try {
+      con = dataSource.getConnection();
+      // articles는 string으로 넘어와서 sql에 int로 들어가야 하기 때문에 (?) 없이 직접 넣어줘야 한다.
+      // 하지만 보안에 취약해서 좋지 않은 방식이다. ( (?)를 사용해야 sql문의 일부로 인식되지 않는다.)
+      // prepareStatement를 사용하지 않고 Statement를 사용한다면 보안에 취약해짐
+      String sql = "DELETE FROM ARTICLE_T WHERE ARTICLE_NO IN (" + articles + ")";
+      ps = con.prepareStatement(sql);
+      deleteResult = ps.executeUpdate();
+    }catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      close();
+    }
+    
+    return deleteResult;
+  }
+  
 }

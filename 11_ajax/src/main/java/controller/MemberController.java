@@ -37,6 +37,13 @@ public class MemberController extends HttpServlet {
 	  case "/member/emailCheck.do":
 	    memberService.memberEmailCheck(request, response);
 	    break;
+	  case "/member/detail.do":
+	    memberService.memberDetail(request, response);
+	    break;
+	  case "/member/modify.do":
+	    memberService.memberModify(request, response);
+	  case "/member/delete.do":
+	    memberService.memberDelete(request, response);
 	  }
 	  
 	}

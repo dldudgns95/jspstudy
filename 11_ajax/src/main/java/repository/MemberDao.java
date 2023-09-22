@@ -63,4 +63,24 @@ public class MemberDao {
     return dto;
   }
   
+  public int memberModify(MemberDto dto) {
+    SqlSession ss = factory.openSession();
+    int modifyResult = ss.update(NS + "memberModify", dto);
+    if(modifyResult == 1) {
+      ss.commit();
+    }
+    ss.close();
+    return modifyResult;
+  }
+  
+  public int memberDelete(int memberNo) {
+    SqlSession ss = factory.openSession();
+    int deleteResult = ss.delete(NS + "memberDelete", memberNo);
+    if(deleteResult == 1) {
+      ss.commit();
+    }
+    ss.close();
+    return deleteResult;
+  }
+  
 }

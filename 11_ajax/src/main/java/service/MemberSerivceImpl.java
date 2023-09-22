@@ -65,7 +65,60 @@ public class MemberSerivceImpl implements MemberService {
     out.println(obj.toString());
     out.flush();
     out.close();
+  }
+  
+  @Override
+  public void memberDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
+    String email = request.getParameter("email");
+    
+    MemberDto dto = dao.getMemberByEmail(email);
+    
+    JSONObject obj = new JSONObject();  // { }
+    obj.put("member", new JSONObject(dto));             // {"member":{"member":1,...}}
+    
+    PrintWriter out = response.getWriter();
+    out.println(obj.toString());
+    out.flush();
+    out.close();
+  }
+  
+  @Override
+  public void memberModify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    MemberDto dto = MemberDto.builder()
+        .memberNo(Integer.parseInt(request.getParameter("memberNo")))
+        .email(request.getParameter("email"))
+        .name(request.getParameter("name"))
+        .gender(request.getParameter("gender"))
+        .address(request.getParameter("address"))
+        .build();
+    
+    int modifyResult = dao.memberModify(dto);
+    
+    JSONObject obj = new JSONObject();      // { }
+    obj.put("modifyResult", modifyResult);  // {"modifyResult":1}
+    
+    PrintWriter out = response.getWriter();
+    out.println(obj.toString());
+    out.flush();
+    out.close();
+  }
+  
+  @Override
+  public void memberDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+    
+    int deleteResult = dao.memberDelete(memberNo);
+    
+    JSONObject obj = new JSONObject();
+    obj.put("deleteResult", deleteResult);
+    
+    PrintWriter out = response.getWriter();
+    out.println(obj.toString());
+    out.flush();
+    out.close();
   }
 
 }

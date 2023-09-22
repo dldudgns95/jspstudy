@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- xml 열 때 open with -> xml editor 로 열기 --> 
+ 
+<mapper namespace="repository.student">
+  
+  <select id="studentList" resultType="domain.StudentDto">
+    SELECT STU_NO, NAME, KOR, ENG, MATH, AVE, GRADE
+      FROM STUDENT_T
+  </select>
+  
+  <select id="studentCount" resultType="int">
+    SELECT COUNT(*)
+      FROM STUDENT_T
+  </select>
+  
+</mapper>

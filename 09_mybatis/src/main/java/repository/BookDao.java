@@ -93,6 +93,16 @@ public class BookDao {
     ss.close();
     return deleteResult;
   }
+  // 삭제 메소드
+  public int bookCheckDelete(String bookNo) {
+    SqlSession ss = factory.openSession(false);
+    int checkDeleteResult = ss.delete(NS + "bookCheckDelete", bookNo);
+    if(checkDeleteResult == 1) {
+      ss.commit();
+    }
+    ss.close();
+    return checkDeleteResult;
+  }
   /*
    * BookDao 테스트를 위한 junit.jar 다운로드
    */

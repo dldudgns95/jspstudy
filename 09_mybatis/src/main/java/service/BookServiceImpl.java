@@ -135,4 +135,20 @@ public class BookServiceImpl implements BookService {
     return new ActionForward(path, true);
   }
   
+  @Override
+  public ActionForward bookCheckDelete(HttpServletRequest request) {
+
+    String bookNo = request.getParameter("bookNo");
+    
+    int deleteResult = dao.bookCheckDelete(bookNo);
+    String path = null;
+    if(deleteResult == 1) {
+      path = request.getContextPath() + "/list.do";
+    } else if(deleteResult == 0) {
+      path = request.getContextPath() + "/index.jsp";
+    }
+    
+    return new ActionForward(path, true);
+  }
+  
 }

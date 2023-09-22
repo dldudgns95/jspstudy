@@ -55,12 +55,10 @@
       FROM BOOK_T 
      WHERE BOOK_NO = #{bookNo} 
   </delete>
-  <!--
-  <delete id="bookDelete" parameterType="String">
+  <delete id="bookCheckDelete" parameterType="String">
     DELETE 
       FROM BOOK_T 
-     WHERE BOOK_NO IN (#{bookNo})
+     WHERE BOOK_NO IN (${bookNo})
   </delete>
-  -->
   
 </mapper>

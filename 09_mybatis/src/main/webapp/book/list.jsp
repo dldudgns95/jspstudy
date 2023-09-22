@@ -29,11 +29,13 @@
         event.preventDefault();
         return;
       } else {
-        var val = [];
-        $('.deleteCheck:checked').each(function(){
-          val.push($(this).val());
-        });
-        location.href='${contextPath}/checkDelete.do?bookNo=' + val;
+        let array = [];
+        $.each($('.deleteCheck'),function(i, elem){
+          if($(elem).is(':checked')) {
+            array.push($(elem).val());
+          }
+        })
+        location.href='${contextPath}/checkDelete.do?bookNo=' + array.join(',');
       }
     })
   }
@@ -56,7 +58,7 @@
         <span>${book.author}</span>
         <span>${book.price}</span>
         <span>${book.pubdate}</span>
-        <input type="checkbox" class="deleteCheck" name="deleteCheck" value="${book.bookNo}">
+        <input type="checkbox" class="deleteCheck" value="${book.bookNo}">
       </div>
     </c:forEach>
   </div>

@@ -64,7 +64,8 @@ public class BookController extends HttpServlet {
 	    af = bookService.bookDelete(request);
 	    break;
 	  case "/checkDelete.do":
-	    System.out.println(request.getParameterValues("bookNo"));
+	    af = bookService.bookCheckDelete(request);
+	    break;
 	  }
 	  
 	  if(af != null) {

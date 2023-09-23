@@ -69,10 +69,10 @@ public class BoardServiceImpl implements BoardService {
     map.put("end", pageVo.getEnd());
     
     // DB로부터 게시글 목록 가져오기
-    List<BoardDto> boardList = dao.getBoardList(map);
+    List<BoardDto> articleList = dao.getBoardList(map);
     
     // 게시글 목록과 paging을 /board/list.jsp로 전달하기 위하여 request에 저장한 뒤 forward 한다.
-    request.setAttribute("boardList", boardList);
+    request.setAttribute("articleList", articleList);
     request.setAttribute("paging", pageVo.getPaging(request.getContextPath() + "/list.do"));
     
     return new ActionForward("/board/list.jsp", false);

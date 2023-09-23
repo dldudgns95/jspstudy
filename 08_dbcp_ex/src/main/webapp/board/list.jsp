@@ -18,7 +18,7 @@
     fnDetail();
   })
   function fnDetail(){
-    $('.article').click(function(){
+    $('#article_title').click(function(){
       location.href='${contextPath}/detail.do?article_no=' + $(this).find('.article_no').text();
     })
   }
@@ -32,6 +32,7 @@
       }
     })
   }
+  console.log('list.jsp 확인');
 </script>
 </head>
 <body>
@@ -44,10 +45,10 @@
   <hr>
   
   <div>
-    <c:forEach items="${boardList}" var="article">
+    <c:forEach items="${articleList}" var="article">
       <div class="article">
         <span class="article_no">${article.article_no}</span>
-        <span>${article.title}</span>
+        <span id="article_title">${article.title}</span>
         <span>${article.created}</span>
         <span><input type="checkbox" id="deleteCheck" name="deleteCheck" value="${article.article_no}"></span>
       </div>

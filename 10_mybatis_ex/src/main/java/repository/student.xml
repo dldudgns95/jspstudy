@@ -16,6 +16,10 @@
     SELECT COUNT(*)
       FROM STUDENT_T
   </select>
+  <select id="studentTotalAve" resultType="double">
+    SELECT AVG(AVE)
+      FROM STUDENT_T
+  </select>
 
   <insert id="studentAdd" parameterType="domain.StudentDto">
     INSERT INTO STUDENT_T(
@@ -57,6 +61,12 @@
     SELECT COUNT(*)
       FROM STUDENT_T
      WHERE AVE BETWEEN #{begin} AND #{end}
+  </select>
+  
+  <select id="studentRangeAve" parameterType="hashMap" resultType="double">
+    SELECT AVG(AVE)
+      FROM STUDENT_T
+      WHERE AVE BETWEEN #{begin} AND #{end}
   </select>
   
   <select id="studentDetail" parameterType="int" resultType="domain.StudentDto">

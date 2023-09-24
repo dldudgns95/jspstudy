@@ -25,11 +25,13 @@ public class StudentServiceImpl implements StudentService {
     List<StudentDto> list = dao.studentList();
     List<StudentDto> topList = dao.studentTopList();
     int studentCount = dao.studentCount();
+    double studentTotalAve = Math.round((dao.studentTotalAve()) * 100.0) / 100.0;
     
     
     request.setAttribute("studentList", list);
     request.setAttribute("studentTopList", topList);
     request.setAttribute("studentCount", studentCount);
+    request.setAttribute("studentTotalAve", studentTotalAve);
     
     return new ActionForward("/student/list.jsp", false);
   }
@@ -84,9 +86,11 @@ public class StudentServiceImpl implements StudentService {
     
     List<StudentDto> studentRangeList = dao.studentRangeList(map);
     int rangeCount = dao.studentRangeCount(map);
+    double studentRangeAve = Math.round((dao.studentRangeAve(map)) * 100.0) / 100.0;
     
     request.setAttribute("studentRangeList", studentRangeList);
     request.setAttribute("rangeCount", rangeCount);
+    request.setAttribute("studentRangeAve", studentRangeAve);
         
     return new ActionForward("/student/list.jsp", false);
   }

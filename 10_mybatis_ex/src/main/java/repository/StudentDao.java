@@ -47,6 +47,13 @@ public class StudentDao {
     return studentCount;
   }
   
+  public double studentTotalAve() {
+    SqlSession ss = factory.openSession();
+    double studentTotalAve = ss.selectOne(NS + "studentTotalAve");
+    ss.close();
+    return studentTotalAve;
+  }
+  
   public List<StudentDto> studentTopList() {
     SqlSession ss = factory.openSession();
     List<StudentDto> list = ss.selectList(NS + "studentTopList");
@@ -76,6 +83,13 @@ public class StudentDao {
     int rangeCount = ss.selectOne(NS + "studentRangeCount", map);
     ss.close();
     return rangeCount;
+  }
+  
+  public double studentRangeAve(Map<String, Object> map) {
+    SqlSession ss = factory.openSession();
+    double studentRangeAve = ss.selectOne(NS + "studentRangeAve", map);
+    ss.close();
+    return studentRangeAve;
   }
   
   public StudentDto studentDetail(int stuNo) {

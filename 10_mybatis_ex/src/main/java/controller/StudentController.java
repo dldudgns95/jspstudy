@@ -44,6 +44,7 @@ public class StudentController extends HttpServlet {
 	  String urlMapping = requestURI.substring(contextPath.length());
 	  PrintWriter out = response.getWriter();
 	  String str = null;
+	  String msg = null;
 	  
 	  switch(urlMapping) {
 	  case "/student/list.do":
@@ -54,10 +55,7 @@ public class StudentController extends HttpServlet {
 	    break;
 	  case "/student/add.do":
 	    af = studentService.studentAdd(request);
-	    str = "<script>alert('등록을 완료했습니다.'); location.href='" + af.getPath() + "';</script>";
-	    out.println(str);
-	    out.flush();
-	    out.close();
+	    msg = "등록을 ";
 	    break;
 	  case "/student/query.do":
 	    af = studentService.studentRangeList(request);
@@ -67,22 +65,21 @@ public class StudentController extends HttpServlet {
 	    break;
 	  case "/student/modify.do":
 	    af = studentService.studentModify(request); 
-	    str = "<script>alert('수정을 완료했습니다.'); location.href='" + af.getPath() + "';</script>";
-      out.println(str);
-      out.flush();
-      out.close();
+	    msg = "수정을 ";
 	    break;
 	  case "/student/delete.do":
 	    af = studentService.studentDelete(request);
-	    str = "<script>alert('삭제를 완료했습니다.'); location.href='" + af.getPath() + "';</script>";
-      out.println(str);
-      out.flush();
-      out.close();
+	    msg = "삭제를 ";
 	    break;
 	  }
 	  
 	  if(af != null) {
-	    if(!af.isRedirect()) {
+	    if(af.isRedirect()) {
+	      str = "<script>alert('" + msg + "완료했습니다.'); location.href='" + af.getPath() + "';</script>";
+	      out.println(str);
+	      out.flush();
+	      out.close();
+	    } else {
 	      request.getRequestDispatcher(af.getPath()).forward(request, response);
 	    }
 	  }

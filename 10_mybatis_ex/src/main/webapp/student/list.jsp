@@ -124,6 +124,13 @@
         </tr>
       </c:forEach>
     </tbody>
+    <tfoot>
+      <tr>
+      <td colspan="5">전체평균</td>
+      <td id="totalAve">${studentTotalAve}${studentRangeAve}</td>
+      <td colspan="3"></td>
+      </tr>
+    </tfoot>
   </table>
 
 </body>

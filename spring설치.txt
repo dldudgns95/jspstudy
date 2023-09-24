@@ -1,0 +1,6 @@
+https://spring.io/ -> project - spring tools 4  -> Spring Tools 4 for Eclipse 에서 windows버전 다운
+						-> 하단에 Spring Tool Suite 3 wiki -> Latest STS3 Downloads 
+						- Spring Tool Suite 3.9.18 
+						- full distribution on Eclipse 4.21 
+						- .zip 파일 다운
+						(eclipse와 버전 맞추는게 좋음)

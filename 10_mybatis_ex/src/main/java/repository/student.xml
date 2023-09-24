@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- xml 열 때 open with -> xml editor 로 열기 --> 
+ 
+<mapper namespace="repository.student">
+  
+  <select id="studentList" resultType="domain.StudentDto">
+    SELECT STU_NO, NAME, KOR, ENG, MATH, AVE, GRADE
+      FROM STUDENT_T
+     ORDER BY STU_NO
+  </select>
+  
+  <select id="studentCount" resultType="int">
+    SELECT COUNT(*)
+      FROM STUDENT_T
+  </select>
+
+  <insert id="studentAdd" parameterType="domain.StudentDto">
+    INSERT INTO STUDENT_T(
+                STU_NO,
+                NAME,
+                KOR,
+                ENG,
+                MATH,
+                AVE,
+                GRADE
+                )
+                VALUES(
+                STUDENT_SEQ.NEXTVAL,
+                #{name},
+                #{kor},
+                #{eng},
+                #{math},
+                #{ave},
+                #{grade}
+                )
+  </insert>
+  
+  <select id="studentTopList" resultType="domain.StudentDto">
+    SELECT NAME, AVE
+      FROM (SELECT NAME, AVE 
+              FROM STUDENT_T 
+             ORDER BY AVE DESC)
+     WHERE ROWNUM &lt; 4
+  </select>
+  
+  <select id="studentRangeList" parameterType="hashMap" resultType="domain.StudentDto">
+    SELECT STU_NO, NAME, KOR, ENG, MATH, AVE, GRADE
+      FROM STUDENT_T
+     WHERE AVE BETWEEN #{begin} AND #{end}
+     ORDER BY STU_NO
+  </select>
+  
+  <select id="studentRangeCount" parameterType="hashMap" resultType="int">
+    SELECT COUNT(*)
+      FROM STUDENT_T
+     WHERE AVE BETWEEN #{begin} AND #{end}
+  </select>
+  
+  <select id="studentDetail" parameterType="int" resultType="domain.StudentDto">
+    SELECT STU_NO, NAME, KOR, ENG, MATH, AVE, GRADE
+      FROM STUDENT_T
+     WHERE STU_NO = #{stuNo}
+  </select>
+  
+  <update id="studentModify" parameterType="domain.StudentDto">
+    UPDATE STUDENT_T
+       SET NAME = #{name}
+         , KOR = #{kor}
+         , ENG = #{eng}
+         , MATH = #{math}
+         , AVE = #{ave}
+         , GRADE = #{grade}
+     WHERE STU_NO = #{stuNo}
+  </update>
+  
+  <delete id="studentDelete" parameterType="int">
+    DELETE
+      FROM STUDENT_T
+     WHERE STU_NO = #{stuNo}
+  </delete>
+  
+</mapper>

@@ -1,0 +1,8 @@
+https://blog.mybatis.org/ -> Products -> MyBatis 3 다운로드 -> mybatis-3.5.13.zip 압축 해제 후 mybatis-3.5.13.jar
+
+https://blog.mybatis.org/ -> Products -> docs -> Building SqlSessionFactory from XML 에서 <!DOCTYPE ... > 복사 후 mybatis-config.xml에 붙여넣기
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+https://blog.mybatis.org/ -> Products -> docs -> Exploring Mapped SQL Statements 에서 <!DOCTYPE ... > 복사 후 book.xml에 붙여넣기

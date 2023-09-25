@@ -79,7 +79,17 @@
   
   <hr>
   <table border="1">
-    <caption>전체 회원수 <span id="student_total">${studenCount}${rangeCount}</span>명</caption>
+    <caption>
+      전체 회원수
+      <span id="student_total">
+        <c:if test="${studentList.isEmpty()}">
+        0
+        </c:if>
+        ${studenCount}
+        ${rangeCount}
+      </span>
+      명
+    </caption>
     <thead>
       <tr>
         <td>학번</td>
@@ -93,6 +103,11 @@
       </tr>
     </thead>
     <tbody id="student_list">
+      <c:if test="${studentList.isEmpty()}">
+        <tr>
+          <td colspan="8">등록된 학생이 없습니다.</td>
+        </tr>
+      </c:if>
       <c:forEach items="${studentList}" var="student">
         <tr>
           <td class="stuNo">${student.stuNo}</td>

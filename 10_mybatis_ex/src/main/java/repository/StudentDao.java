@@ -49,7 +49,7 @@ public class StudentDao {
   
   public double studentTotalAve() {
     SqlSession ss = factory.openSession();
-    double studentTotalAve = ss.selectOne(NS + "studentTotalAve");
+    double studentTotalAve = (ss.selectOne(NS + "studentTotalAve") == null) ? 0.0 : ss.selectOne(NS + "studentTotalAve") ;
     ss.close();
     return studentTotalAve;
   }
@@ -87,7 +87,7 @@ public class StudentDao {
   
   public double studentRangeAve(Map<String, Object> map) {
     SqlSession ss = factory.openSession();
-    double studentRangeAve = ss.selectOne(NS + "studentRangeAve", map);
+    double studentRangeAve = (ss.selectOne(NS + "studentRangeAve", map) == null) ? 0.0 : ss.selectOne(NS + "studentRangeAve", map) ;
     ss.close();
     return studentRangeAve;
   }

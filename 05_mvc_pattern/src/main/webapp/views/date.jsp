@@ -11,9 +11,7 @@
 </head>
 <body>
 
-  
   ${today}
-  
 
 </body>
 </html>

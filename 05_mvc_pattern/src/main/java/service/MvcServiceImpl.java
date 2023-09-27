@@ -25,9 +25,8 @@ public class MvcServiceImpl implements MvcService {
   }
   
   @Override
-  public void getDatetime(HttpServletRequest request, HttpServletResponse response)  {
+  public void getDatetime(HttpServletRequest request, HttpServletResponse response) {
     String datetime = LocalDateTime.now().toString();
-    
     PrintWriter out = null;
     try {
       out = response.getWriter();
